@@ -3,6 +3,7 @@ using Clinica_Medica.Interfaces;
 using Clinica_Medica.Service;
 using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Radzen;
 
 var builder = WebApplication.CreateBuilder(args);
 

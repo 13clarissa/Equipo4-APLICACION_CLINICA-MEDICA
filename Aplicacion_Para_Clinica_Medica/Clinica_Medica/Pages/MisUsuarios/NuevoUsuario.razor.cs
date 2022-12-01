@@ -25,7 +25,7 @@ namespace Clinica_Medica.Pages.MisUsuarios
 
 			if (inserto)
 			{
-				await Swal.FireAsync("Felifidades", "Usuario Guardado", SweetAlertIcon.Success);
+				await Swal.FireAsync("Felicidades", "Usuario Guardado", SweetAlertIcon.Success);
 			}
 			else
 			{
