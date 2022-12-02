@@ -1,6 +1,6 @@
 ﻿namespace Clinica_Medica.Pages.MisPacientes
 {
-    public class NuevoPaciente
+    public partial class NuevoPaciente
     {
     }
 }

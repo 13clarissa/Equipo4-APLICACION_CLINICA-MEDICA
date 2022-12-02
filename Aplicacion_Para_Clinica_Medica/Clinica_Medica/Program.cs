@@ -17,6 +17,7 @@ builder.Services.AddSingleton(cadenaConexion);
 
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IServiciosService, ServiciosService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 builder.Services.AddHttpContextAccessor();

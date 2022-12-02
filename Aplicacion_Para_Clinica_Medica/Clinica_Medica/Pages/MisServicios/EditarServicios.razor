@@ -1,5 +1,71 @@
-﻿<h3>EditarServicios</h3>
+﻿@page "/Servicios/Editar/{Codigo}"
 
-@code {
+<AuthorizeView Roles="Administrador">
+	<Authorized Context="AuthenticationState">
 
-}
+		<h3>Editar Servicio</h3>
+		<br />
+		<EditForm Model="@serv">
+			<DataAnnotationsValidator />
+			<div class="form-group row">
+				<label for="Codigo" class="col-sm-2 col-form-label">
+					Código
+				</label>
+				<div class="col-sm-10">
+					<label for="Codigo" class="col-sm-2 col-form-label">
+						@serv.Codigo
+					</label>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="Descripcion" class="col-sm-2 col-form-label">
+					Descripción
+				</label>
+				<div class="col-sm-10">
+					<InputText id="Descripcion" class="form-control" @bind-Value="serv.Descripcion" />
+					<ValidationMessage For="@(() => serv.Descripcion)" />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="Precio" class="col-sm-2 col-form-label">
+					Precio
+				</label>
+				<div class="col-sm-10">
+					<InputNumber id="Precio" class="form-control" @bind-Value="serv.Precio" />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="Imagen" class="col-sm-2 col-form-label">
+					Imagen
+				</label>
+				<div class="col-sm-10">
+					<InputFile OnChange="@SeleccionarIMagen"></InputFile>
+					@if (serv.Imagen != null)
+					{
+						string base64 = Convert.ToBase64String(serv.Imagen);
+						string imgUrl1 = String.Format("data:image/gif;base64,{0}", base64);
+						<img style="width:300px; height:300px" src="@imgUrl1">
+					}
+					else
+					{
+						<img style="width:300px; height:300px" src="@imgUrl">
+					}
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<p>
+					<input type="submit" class="btn btn-primary" value="Guardar" @onclick="Guardar" />
+					<input type="submit" class="btn btn-danger" value="Cancelar" @onclick="Cancelar" />
+					<input type="submit" class="btn btn-danger" value="Eliminar" @onclick="Eliminar" />
+				</p>
+			</div>
+
+		</EditForm>
+
+
+	</Authorized>
+</AuthorizeView>
