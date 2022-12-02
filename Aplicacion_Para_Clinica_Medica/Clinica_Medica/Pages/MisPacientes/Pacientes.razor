@@ -1,5 +1,57 @@
-﻿<h3>Pacientes</h3>
+﻿@page "/Pacientes"
+@using Modelos;
 
-@code {
+<AuthorizeView Roles="Administrador">
+	<Authorized Context="AuthenticationState">
 
-}
+		<h2>Lista de Pacientes</h2>
+		<div class="form-group row">
+			<div class="col-sm-10">
+				<a href="/Pacientes/Nuevo" class="btn btn-primary m-1">Nuevo Paciente</a>
+			</div>
+
+		</div>
+
+		@if (listaPaciente == null)
+		{
+			<p>No existen pacientes en el sistema</p>
+		}
+		else
+		{
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Identidad</th>
+						<th>Nombre</th>
+						<th>Teléfono</th>
+						<th>Fecha Nacimiento</th>
+						<th>Dirección</th>
+						<th>Estado Civil</th>
+						<th>Género</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (Paciente pacien in listaPaciente)
+					{
+						
+						<tr>
+							<td>@pacien.IdentidadPaciente</td>
+							<td>@pacien.Nombre</td>
+							<td>@pacien.Telefono</td>
+							<td>@pacien.FechaNacimiento</td>
+							<td>@pacien.Direccion</td>
+							<td>@pacien.EstadoCivil</td>
+							<td>@pacien.Genero</td>
+							<td>
+								<a class="btn btn-success" href="@($"/Pacientes/Editar/{pacien.IdentidadPaciente}")">Editar</a>
+							</td>
+						</tr>
+						
+					}
+			 </tbody>
+
+			</table>
+		}
+
+	</Authorized>
+</AuthorizeView>
