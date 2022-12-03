@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Datos.Repositorios
 {
-    public class FacturaRepositorio : IFacturaRepositorio
+    public class DetalleFacturaRepositorio : IDetalleFacturaRepositorio
     {
         private string CadenaConexon;
 
-        public FacturaRepositorio(string _cadenaConexion)
+        public DetalleFacturaRepositorio(string _cadenaConexion)
         {
             CadenaConexon = _cadenaConexion;
         }
@@ -23,22 +23,21 @@ namespace Datos.Repositorios
         {
             return new MySqlConnection(CadenaConexon);
         }
-
-        public async Task<int> Nueva(Factura factura)
+        public async Task<bool> Nuevo(DetalleFactura detalleFactura)
         {
-            int idFactura = 0;
+            bool inserto = false;
             try
             {
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
-                string sql = @"INSERT INTO factura (IdentidadPaciente, Fecha, CodigoUsuario, ISV, Descuento, SubTotal, Total) 
-                               VALUES (@IdentidadCliente, @Fecha, @CodigoUsuario, @ISV, @Descuento, @SubTotal, @Total); SELECT LAST_INSERT_ID()";
-                idFactura = Convert.ToInt32(await conexion.ExecuteScalarAsync(sql, factura));
+                string sql = @"INSERT INTO detallefactura (IdFactura, CodigoProducto, Precio, Cantidad, Total) 
+                               VALUES (@IdFactura, @CodigoProducto, @Precio, @Cantidad, @Total);";
+                inserto = Convert.ToBoolean(await conexion.ExecuteAsync(sql, detalleFactura));
             }
             catch (Exception ex)
             {
             }
-            return idFactura;
+            return inserto;
         }
     }
 }

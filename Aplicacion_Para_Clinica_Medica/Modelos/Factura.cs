@@ -9,7 +9,7 @@ namespace Modelos
     public class Factura
     {
         public int Id { get; set; }
-        public string IdentidadCliente { get; set; }
+        public string IdentidadPaciente { get; set; }
         public DateTime Fecha { get; set; }
         public string CodigoUsuario { get; set; }
         public decimal ISV { get; set; }
