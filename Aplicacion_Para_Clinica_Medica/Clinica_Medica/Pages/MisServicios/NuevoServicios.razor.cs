@@ -40,7 +40,7 @@ namespace Clinica_Medica.Pages.MisServicios
 
             if (inserto)
             {
-                await Swal.FireAsync("Advertencia", "Servicio guardado con exito", SweetAlertIcon.Success);
+                await Swal.FireAsync("Felicidades", "Servicio guardado con exito", SweetAlertIcon.Success);
                 _navigationManager.NavigateTo("/Servicios");
             }
             else
