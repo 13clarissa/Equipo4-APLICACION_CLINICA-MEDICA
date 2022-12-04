@@ -10,6 +10,36 @@
 						<b>Identidad Cliente:</b>
 						<InputText id="IdentidadPaciente" class="form-control" @bind-Value="factura.IdentidadPaciente" />
 					</div>
+
+					<div class="col-sm-2">
+						<b>Fecha:</b>
+						<RadzenDatePicker id="Fecha" class="form-control" @bind-Value="factura.Fecha" />
+					</div>
+				</div>
+			</div>
+
+			<br/>
+			<div class="rz-card card" style="width:100%">
+				<div class="form-group row">
+					<div class="col-sm-2">
+						<b>Codigo Servicio:</b>
+						<InputNumber id="Codigo" class="form-control" @bind-Value="@servicio.Codigo" />
+					</div>
+					
+					<div class="col-sm-5">
+						<b>Descrpcion:</b>
+						<InputText id="Descrpcion" class="form-control" @bind-Value="@servicio.Descripcion" />
+					</div>
+
+					<div class="col-sm-2">
+						<b>Cantidad:</b>
+						<InputNumber id="Cantidad" class="form-control" @bind-Value="@cantidad" />
+					</div>
+
+					<div class="col-sm-2">
+						<b>Agregar:</b>
+						<input type="submit" class="btn btn-primary" value="Agregar" @onclick="@AgregarServicio" />
+					</div>
 				</div>
 			</div>
 
