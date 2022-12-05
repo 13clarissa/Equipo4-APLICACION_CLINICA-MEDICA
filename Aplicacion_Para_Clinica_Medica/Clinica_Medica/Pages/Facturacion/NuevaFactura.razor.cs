@@ -1,4 +1,5 @@
 ﻿using Clinica_Medica.Interfaces;
+using Clinica_Medica.Service;
 using CurrieTechnologies.Razor.SweetAlert2;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -10,13 +11,14 @@ namespace Clinica_Medica.Pages.Facturacion
     {
         [Inject] private IFacturaService facturaService { get; set; }
         [Inject] private IDetalleFacturaService detalleFacturaService { get; set; }
-        [Inject] private IServiciosService productoService { get; set; }
+        [Inject] private IServiciosService serviciosService { get; set; }
         [Inject] private SweetAlertService Swal { get; set; }
         [Inject] NavigationManager _navigationManager { get; set; }
         [Inject] private IHttpContextAccessor httpContextAccessor { get; set; }
 
         private Factura factura = new Factura();
         private List<DetalleFactura> listaDetalleFactura = new List<DetalleFactura>();
+
         private Servicio servicio = new Servicio();
 
         private int cantidad { get; set; }
@@ -30,7 +32,7 @@ namespace Clinica_Medica.Pages.Facturacion
 
         private async void BuscarServicio()
         {
-            servicio = await productoService.GetPorCodigo(Convert.ToInt32(codigoServicio));
+            servicio = await serviciosService.GetPorCodigo(Convert.ToInt32(codigoServicio));
         }
 
         protected async Task AgregarServicio(MouseEventArgs args)
@@ -50,7 +52,7 @@ namespace Clinica_Medica.Pages.Facturacion
                     servicio.Codigo = 0;
                     servicio.Descripcion = string.Empty;
                     servicio.Precio = 0;
-                    servicio.Existencia = 0;
+                    servicio.CitasDisponibles = 0;
                     cantidad = 0;
                     codigoServicio = "0";
 
@@ -66,13 +68,13 @@ namespace Clinica_Medica.Pages.Facturacion
         	protected async Task Guardar()
             {
 			factura.CodigoUsuario = httpContextAccessor.HttpContext.User.Identity.Name;
-			int idFactura = await facturaServicio.Nueva(factura);
+			int idFactura = await facturaService.Nueva(factura);
 			if (idFactura != 0)
 			{
 				foreach (var item in listaDetalleFactura)
 				{
-					item.IdFactura = idFactura;
-					await detalleFacturaServicio.Nuevo(item);
+                    item.IdFactura = idFactura;
+					await detalleFacturaService.Nuevo(item);
 				}
 				await Swal.FireAsync("Felicidades", "Factura guardada con exito", SweetAlertIcon.Success);
 			}

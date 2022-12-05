@@ -11,6 +11,7 @@ namespace Modelos
         public int Id { get; set; }
         public int IdFactura { get; set; }
         public int CodigoServicio { get; set; }
+        public string Servicio { get; set; }
         public decimal Precio { get; set; }
         public int Cantidad { get; set; }
         public decimal Total { get; set; }
