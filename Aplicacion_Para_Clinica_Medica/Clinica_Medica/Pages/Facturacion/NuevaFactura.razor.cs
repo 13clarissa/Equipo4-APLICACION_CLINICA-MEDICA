@@ -27,17 +27,43 @@ namespace Clinica_Medica.Pages.Facturacion
             factura.Fecha = DateTime.Now;
         }
 
-        //************************************* COMENZAR DESDE AQUI ABAJO ***************************************************
 
         private async void BuscarServicio()
         {
-            
+            servicio = await productoService.GetPorCodigo(Convert.ToInt32(codigoServicio));
         }
 
         protected async Task AgregarServicio(MouseEventArgs args)
         {
+            if (args.Detail != 0)
+            {
+                if (servicio != null)
+                {
+                    DetalleFactura detalle = new DetalleFactura();
+                    detalle.Servicio = servicio.Descripcion;
+                    detalle.CodigoServicio = servicio.Codigo;
+                    detalle.Cantidad = Convert.ToInt32(cantidad);
+                    detalle.Precio = servicio.Precio;
+                    detalle.Total = servicio.Precio * Convert.ToInt32(cantidad);
+                    listaDetalleFactura.Add(detalle);
+
+                    servicio.Codigo = 0;
+                    servicio.Descripcion = string.Empty;
+                    servicio.Precio = 0;
+                    servicio.Existencia = 0;
+                    cantidad = 0;
+                    codigoServicio = "0";
+
+                    factura.SubTotal = factura.SubTotal + detalle.Total;
+                    factura.ISV = factura.SubTotal * 0.15M;
+                    factura.Total = factura.SubTotal + factura.ISV - factura.Descuento;
+                }
+
+            }
 
         }
+
+        //************************************* COMENZAR DESDE AQUI ABAJO ***************************************************
 
     }
 }
