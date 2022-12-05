@@ -26,6 +26,11 @@
 						<InputNumber id="Codigo" class="form-control" @bind-Value="@servicio.Codigo" />
 					</div>
 					
+					<div class="col-sm-1">
+						<b>Buscar:</b>
+						<input type="submit" class="btn btn-primary" value="Buscar" @onclick="@BuscarServicio" />
+					</div>
+
 					<div class="col-sm-5">
 						<b>Descrpcion:</b>
 						<InputText id="Descrpcion" class="form-control" @bind-Value="@servicio.Descripcion" />
@@ -42,6 +47,64 @@
 					</div>
 				</div>
 			</div>
+
+
+			<table class="table">
+				<thead>
+					<tr>
+						<tr>Codigo</tr>
+						<tr>IdFactura</tr>
+						<tr>Cantidad</tr>
+						<tr>Precio</tr>
+						<tr>Total</tr>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var det in listaDetalleFactura){
+						<tr>
+							<td>@det.CodigoServicio</td>
+							<td>@det.IdFactura</td>
+							<td>@det.Cantidad</td>
+							<td>@det.Precio</td>
+							<td>@det.Total</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<br />
+			<div aling="right">
+				<div class="form-group row">
+					<label for="SubtTotal" class="col-sm-10 col-form-label">SubTotal</label>
+				    <div class="col-md-2">
+					    <ImputNumber readonly id="SubTotal" TValue="Decimal" class="form-control" @bind-value="factura.SubtoTotal" ValueExpression="@( () => factura.SubTotal )"/>
+				    </div>
+				</div>
+
+				<div class="form-group row">
+					<label for="Descuento" class="col-sm-10 col-form-label">Descuento</label>
+				    <div class="col-md-2">
+					    <ImputNumber readonly id="Descuento" TValue="Decimal" class="form-control" @bind-value="factura.Descuento" ValueExpression="@( () => factura.Descuento )"/>
+				    </div>
+				</div>
+
+				<div class="form-group row">
+					<label for="ISV" class="col-sm-10 col-form-label">Impuesto</label>
+				    <div class="col-md-2">
+					    <ImputNumber readonly id="ISV" TValue="Decimal" class="form-control" @bind-value="factura.ISV" ValueExpression="@( () => factura.ISV )"/>
+				    </div>
+				</div>
+
+				<div class="form-group row">
+					<label for="Total" class="col-sm-10 col-form-label">Total</label>
+				    <div class="col-md-2">
+					    <ImputNumber readonly id="Total" TValue="Decimal" class="form-control" @bind-value="factura.Total" ValueExpression="@( () => factura.Total )"/>
+				    </div>
+				</div>
+			</div>
+			<div aling="right">
+				<input type="submit" class="btn btn-primary" value="Guardar Factura" @inclick="Guardar" />
+			</div>
+
 
 		</EditForm>
 

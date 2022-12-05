@@ -13,7 +13,7 @@ namespace Clinica_Medica.Pages.Facturacion
         [Inject] private IServiciosService productoService { get; set; }
         [Inject] private SweetAlertService Swal { get; set; }
         [Inject] NavigationManager _navigationManager { get; set; }
-        //[Inject] private IHttpContextAccessor httpContextAccessor { get; set; }
+        [Inject] private IHttpContextAccessor httpContextAccessor { get; set; }
 
         private Factura factura = new Factura();
         private List<DetalleFactura> listaDetalleFactura = new List<DetalleFactura>();
@@ -21,6 +21,18 @@ namespace Clinica_Medica.Pages.Facturacion
 
         private int cantidad { get; set; }
         private string codigoServicio { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            factura.Fecha = DateTime.Now;
+        }
+
+        //************************************* COMENZAR DESDE AQUI ABAJO ***************************************************
+
+        private async void BuscarServicio()
+        {
+            
+        }
 
         protected async Task AgregarServicio(MouseEventArgs args)
         {
