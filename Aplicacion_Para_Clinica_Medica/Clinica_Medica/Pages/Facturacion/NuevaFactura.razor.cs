@@ -62,8 +62,28 @@ namespace Clinica_Medica.Pages.Facturacion
             }
 
         }
+                
+        	protected async Task Guardar()
+            {
+			factura.CodigoUsuario = httpContextAccessor.HttpContext.User.Identity.Name;
+			int idFactura = await facturaServicio.Nueva(factura);
+			if (idFactura != 0)
+			{
+				foreach (var item in listaDetalleFactura)
+				{
+					item.IdFactura = idFactura;
+					await detalleFacturaServicio.Nuevo(item);
+				}
+				await Swal.FireAsync("Felicidades", "Factura guardada con exito", SweetAlertIcon.Success);
+			}
+			else
+			{
+				await Swal.FireAsync("Error", "No se pudo guardar la factura", SweetAlertIcon.Error);
+			}
 
-        //************************************* COMENZAR DESDE AQUI ABAJO ***************************************************
+            }
+
+
 
     }
 }
