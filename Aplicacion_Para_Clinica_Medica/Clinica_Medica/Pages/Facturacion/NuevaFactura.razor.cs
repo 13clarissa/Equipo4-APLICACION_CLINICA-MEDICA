@@ -43,7 +43,7 @@ namespace Clinica_Medica.Pages.Facturacion
                 {
                     DetalleFactura detalle = new DetalleFactura();
                     detalle.Servicio = servicio.Descripcion;
-                    detalle.CodigoServicio = servicio.Codigo;
+                    detalle.Servicio_Codigo = servicio.Codigo;
                     detalle.Cantidad = Convert.ToInt32(cantidad);
                     detalle.Precio = servicio.Precio;
                     detalle.Total = servicio.Precio * Convert.ToInt32(cantidad);
@@ -73,7 +73,7 @@ namespace Clinica_Medica.Pages.Facturacion
 			{
 				foreach (var item in listaDetalleFactura)
 				{
-                    item.IdFactura = idFactura;
+                    item.Factura_Id = idFactura;
 					await detalleFacturaService.Nuevo(item);
 				}
 				await Swal.FireAsync("Felicidades", "Factura guardada con exito", SweetAlertIcon.Success);
