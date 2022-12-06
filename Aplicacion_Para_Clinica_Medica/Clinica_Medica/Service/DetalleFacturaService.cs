@@ -19,5 +19,7 @@ namespace Clinica_Medica.Service
         {
             return await detalleFacturaRepositorio.Nuevo(detalleFactura);
         }
+
+
     }
 }

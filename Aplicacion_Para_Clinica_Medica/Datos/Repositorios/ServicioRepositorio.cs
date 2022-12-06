@@ -31,7 +31,7 @@ namespace Datos.Repositorios
                 using MySqlConnection conexion = Conexion();
                 await conexion.OpenAsync();
                 string sql = @"UPDATE servicio SET Descripcion = @Descripcion, Precio = @Precio, FechaCreacion = @FechaCreacion, 
-                               Imagen = @Imagen WHERE Codigo = @Codigo;";
+                               Imagen = @Imagen CitasDisponibles = @CitasDisponibles WHERE Codigo = @Codigo;";
                 resultado = Convert.ToBoolean(await conexion.ExecuteAsync(sql, servicio));
             }
             catch (Exception ex)

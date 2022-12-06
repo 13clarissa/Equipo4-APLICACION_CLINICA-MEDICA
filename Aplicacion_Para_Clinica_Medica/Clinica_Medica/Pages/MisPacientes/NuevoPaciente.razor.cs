@@ -17,7 +17,9 @@ namespace Clinica_Medica.Pages.MisPacientes
 		protected async void Guardar()
 		{
 			if (string.IsNullOrEmpty(pac.IdentidadPaciente) || string.IsNullOrEmpty(pac.Nombre)
-				|| string.IsNullOrEmpty(pac.Telefono) || string.IsNullOrEmpty(pac.Direccion) || string.IsNullOrEmpty(Convert.ToDateTime(pac.FechaNacimiento).ToString()) || pac.EstadoCivil == "Seleccionar" || pac.Genero == "Seleccionar")
+				|| string.IsNullOrEmpty(pac.Telefono) || string.IsNullOrEmpty(pac.Direccion) ||
+				string.IsNullOrEmpty(Convert.ToDateTime(pac.FechaNacimiento).ToString()) ||
+				string.IsNullOrEmpty(pac.EstadoCivil) || pac.EstadoCivil == "Seleccionar" || string.IsNullOrEmpty(pac.Genero) || pac.Genero == "Seleccionar")
 			{
 				return;
 			}
