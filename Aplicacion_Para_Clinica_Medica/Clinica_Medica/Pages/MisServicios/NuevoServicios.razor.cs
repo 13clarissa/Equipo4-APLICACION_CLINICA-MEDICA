@@ -34,9 +34,20 @@ namespace Clinica_Medica.Pages.MisServicios
                 return;
             }
             serv.FechaCreacion = DateTime.Now;
+			Servicio servicioExistente = new Servicio();
 
-            
-            bool inserto = await serviciosService.Nuevo(serv);
+			servicioExistente = await serviciosService.GetPorCodigo(serv.Codigo);
+
+			if (servicioExistente != null)
+			{
+				if (!string.IsNullOrEmpty(servicioExistente.Codigo.ToString()))
+				{
+					await Swal.FireAsync("Advertencia", "Ya existe un producto con este código", SweetAlertIcon.Warning);
+					return;
+				}
+			}
+
+			bool inserto = await serviciosService.Nuevo(serv);
 
             if (inserto)
             {

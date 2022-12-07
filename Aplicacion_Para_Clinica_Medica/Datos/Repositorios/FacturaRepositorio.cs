@@ -34,12 +34,12 @@ namespace Datos.Repositorios
 				string sql = @"INSERT INTO factura (IdentidadPaciente, Fecha, CodigoUsuario, ISV, Descuento, SubTotal, Total) 
                                VALUES (@IdentidadPaciente, @Fecha, @CodigoUsuario, @ISV, @Descuento, @SubTotal, @Total); SELECT LAST_INSERT_ID()";
 				idFactura = Convert.ToInt32(await conexion.ExecuteScalarAsync(sql, factura));
-
 			}
 			catch (Exception ex)
 			{
 			}
 			return idFactura;
 		}
+		
 	}
 }

@@ -36,27 +36,27 @@ namespace Clinica_Medica.Pages.MisServicios
             imgUrl = $"data:{imageType};base64,{Convert.ToBase64String(buffers)}";
         }
 
-        protected async Task Guardar()
-        {
-            if (string.IsNullOrEmpty(serv.Descripcion))
-            {
-                return;
-            }
+		protected async Task Guardar()
+		{
+			if (string.IsNullOrEmpty(serv.Descripcion))
+			{
+				return;
+			}
 
-            bool edito = await serviciosService.Actualizar(serv);
+			bool edito = await serviciosService.Actualizar(serv);
 
-            if (edito)
-            {
-                await Swal.FireAsync("Advertencia", "Servicio guardado con exito", SweetAlertIcon.Success);
-                _navigationManager.NavigateTo("/Servicios");
-            }
-            else
-            {
-                await Swal.FireAsync("Advertencia", "No se pudo guardar el servicio", SweetAlertIcon.Error);
-            }
-        }
+			if (edito)
+			{
+				await Swal.FireAsync("Advertencia", "Servicio guardado con exito", SweetAlertIcon.Success);
+				_navigationManager.NavigateTo("/Servicios");
+			}
+			else
+			{
+				await Swal.FireAsync("Advertencia", "No se pudo guardar el Servicio", SweetAlertIcon.Error);
+			}
+		}
 
-        protected async Task Cancelar()
+		protected async Task Cancelar()
         {
             _navigationManager.NavigateTo("/Servicios");
         }

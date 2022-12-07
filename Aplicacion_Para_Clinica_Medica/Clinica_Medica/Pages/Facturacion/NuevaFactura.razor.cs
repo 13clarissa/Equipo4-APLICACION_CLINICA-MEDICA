@@ -61,7 +61,6 @@ namespace Clinica_Medica.Pages.Facturacion
 
         }
 
-
         protected async Task Guardar()
         {
             factura.CodigoUsuario = httpContextAccessor.HttpContext.User.Identity.Name;
